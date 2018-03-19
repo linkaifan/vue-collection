@@ -39,6 +39,7 @@
 		padding-top: 3.8vw;
 		display: flex;
 		justify-content: space-between;
+		z-index: 99;
 	}
 	.logo{
 		width: 24vw;
