@@ -60,7 +60,7 @@
 					<form name="upForm" id='upForm'>
 						<div class="inputBox" :key="index"
 						v-for="(item, index) in upItem1">
-							<p>{{item.china}}</p>
+							<p><span>*</span> {{item.china}}</p>
 							<input type="text" :name="item.name"/>
 						</div>
 					</form>
@@ -274,5 +274,34 @@
 	    background: white;
 	    border-radius: 10px;
 	    color:rgb(51, 208, 102);
+	}
+	.basMsg,
+	.detailMsg{
+		padding-left: 3vw;
+		font-size: 12px;
+		text-align: left;
+	}
+	.inputBox>p{
+		height: 4vw;
+		line-height: 4vw;
+		margin: 4vw 0 2vw 0;
+	}
+	.inputBox>input{
+		height: 6.7vw;
+		width: 99%;
+		border-radius: 5px;
+		border: 1px solid rgb(178, 178, 178);
+		text-indent: 2px;
+	}
+	.inputBox>textarea{
+		width: 97%;
+		height: 18vw;
+		border: 1px solid rgb(191, 191, 191);
+		border-radius: 5px;
+		color: #333333;
+		text-indent: 2px;
+	}
+	.inputBox p span{
+		color: red;
 	}
 </style>
