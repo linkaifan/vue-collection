@@ -96,6 +96,7 @@
 
 <script>
 	import myhead from '@/components/Fhead'
+	import axios from 'axios'
 	export default {
 		name:"Upload",
 		components:{

@@ -25,42 +25,22 @@
 	</div>
 </template>
 <script>
+	import axios from 'axios'
+
 	export default{
 		data(){
 			return {
 				oImgs:[],
 				curIndex:0,
-				items:[{
-					img:'tu1',
-					title:'1',
-					intro:'11',
-					content:'111',
-				},{
-					img:'tu2',
-					title:'2',
-					intro:'22',
-					content:'222',
-				},{
-					img:'tu3',
-					title:'3',
-					intro:'33',
-					content:'333',
-				},{
-					img:'tu4',
-					title:'4',
-					intro:'44',
-					content:'444',
-				},{
-					img:'tu5',
-					title:'5',
-					intro:'55',
-					content:'555',
-				}]
+				items:[]
 			}
 		},
 		methods:{
 			imgInitP() {
-				this.oImgs = document.getElementsByClassName('imgBox')
+				let imgs = document.getElementsByClassName('imgBox')
+				for (var i = 0; i < this.items.length; i++) {
+					this.oImgs.push(imgs[i])
+				}
 				let Imgsheight = []
 				let addTop = new Array(this.oImgs.length).fill(0)
 				for (let i = 0; i < this.oImgs.length; i++) {
@@ -74,12 +54,6 @@
 					this.oImgs[i].style.top = addTop[i] + 22*i +'px';
 				}
 			},
-			init() {
-				this.imgInitP()
-	      this.play()
-	      window.onblur = function() { this.stop() }.bind(this)
-	     window.onfocus = function() { this.play() }.bind(this)
-	    },
 	    //dir 参数表示方向，-1向上滑动，1向下滑动，默认-1
 			move(dir){
 				dir = dir || -1;
@@ -121,17 +95,35 @@
 		        this.timer = null
 		    }
 		    this.timer = window.setInterval(() => {
-		        this.move();
+		       this.move();
 		    }, 2000)
 			},
 			stop() {
 		    window.clearInterval(this.timer)
 		    this.timer = null
-			}
+			},
+			init(){
+				axios.get('http://localhost:3001/worker')
+		    .then((res)=>{        
+		      let len = res.data.length;
+		      for (let i = 0; i < len; i++) {
+		      	this.items.push(res.data[i])    	
+		      }    
+		    }).then(()=>{
+  				this.imgInitP()
+  	      this.play()
+	       	window.onblur = function() { this.stop() }.bind(this)
+	      	window.onfocus = function() { this.play() }.bind(this)
+		    })
+		    .catch(error=>{
+		      console.log(error);
+		    })
+			},
+
 		},
 		mounted() {
 		  this.init()
-		},
+		},	
 	}
 </script>
 

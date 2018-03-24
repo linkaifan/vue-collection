@@ -1,7 +1,7 @@
 <template>
 	<div id="worker">
 		<myhead></myhead>
-		<scroll class=""></scroll>
+		<scroll></scroll>
 		<div class="btn">
 			<router-link to="/Upload">
 				加入我们
@@ -21,9 +21,11 @@
 		},
 		data(){
 			return{
-
+				
 			}
-		}
+		},
+		methods:{
+		},
 	}
 </script>
 
