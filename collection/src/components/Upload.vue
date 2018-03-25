@@ -61,7 +61,8 @@
 						<div class="inputBox" :key="index"
 						v-for="(item, index) in upItem1">
 							<p><span>*</span> {{item.china}}</p>
-							<input type="text" :name="item.name"/>
+							<input type="text" :name="item.name" 
+							form="upform"/>
 						</div>
 					</form>
 				</div>
@@ -70,7 +71,8 @@
 					v-for="(item, index) in upItem2">
 						<p>{{item.china}}</p>
 						<textarea type="text" :name="item.name" 
-						:placeholder=" '请在此输入'+ item.china">		
+						:placeholder=" '请在此输入'+ item.china" 
+						form="upform">		
 						</textarea>
 					</div>
 				</div>
@@ -146,7 +148,19 @@
 				}				
 			},
 			complete(){
-				console.log(666)
+				let url = 'http://localhost:3001/upload'
+				let inputs = document.getElementsByTagName('input');
+				let texts = document.getElementsByTagName('textarea');
+				let [avatar,name,academy,phone,intro,exper] = 
+				[inputs[0],inputs[1].value,inputs[2].value,inputs[3].value,texts[0].value,texts[1].value]
+				let upData = {name,academy,phone,intro,exper}
+				console.log(upData)
+				axios.post(url, upData)
+				.then((res) =>{
+					console.log(res)
+				}).catch(function (err) {
+					console.log(err);
+				});
 			}
 		},
 		computed:{
